@@ -1,0 +1,169 @@
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+.wf-popover {
+  position: relative;
+  display: inline-block;
+}
+
+.wf-popover-trigger {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.popover-content {
+  position: absolute;
+  background-color: var(--bg-popover, #fff); /* fallback to white */
+  color: var(--text-popover-foreground, #222); /* fallback to dark text */
+  outline: none;
+  z-index: 50;
+  width: 18rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform-origin: var(--bits-popover-content-transform-origin);
+}
+
+/* Animation States */
+[data-state='open'] {
+  animation: fadeIn 0.15s ease-out, zoomIn 0.15s ease-out;
+}
+
+[data-state='closed'] {
+  animation: fadeOut 0.15s ease-in, zoomOut 0.15s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+@keyframes zoomOut {
+  from { transform: scale(1); }
+  to { transform: scale(0.95); }
+}
+
+/* Slide in based on side */
+[data-side='bottom'] {
+  animation: slideInFromTop 0.2s ease-out;
+}
+
+[data-side='left'] {
+  animation: slideInFromRight 0.2s ease-out;
+}
+
+[data-side='right'] {
+  animation: slideInFromLeft 0.2s ease-out;
+}
+
+[data-side='top'] {
+  animation: slideInFromBottom 0.2s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from { transform: translateY(-0.5rem); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(0.5rem); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-0.5rem); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(0.5rem); }
+  to { transform: translateY(0); }
+}
+
+.wf-popover--top {
+  bottom: 100%;
+  left: 0;
+  margin-bottom: var(--popover-offset, 8px);
+}
+.wf-popover--bottom {
+  top: 100%;
+  left: 0;
+  margin-top: var(--popover-offset, 8px);
+}
+.wf-popover--left {
+  right: 100%;
+  top: 0;
+  margin-right: var(--popover-offset, 8px);
+}
+.wf-popover--right {
+  left: 100%;
+  top: 0;
+  margin-left: var(--popover-offset, 8px);
+}
+
+/* Arrow base style */
+.wf-popover-arrow {
+  width: 1rem;
+  height: 1rem;
+  background: inherit;
+  position: absolute;
+  z-index: 51;
+}
+
+/* Arrow for each placement */
+.wf-popover--top .wf-popover-arrow {
+  bottom: -0.5rem;
+  left: 1.5rem;
+  transform: rotate(180deg);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  background: var(--bg-popover, #fff);
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.wf-popover--bottom .wf-popover-arrow {
+  top: -0.5rem;
+  left: 1.5rem;
+  clip-path: polygon(50% 0%, 0 100%, 100% 100%);
+  background: var(--bg-popover, #fff);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.wf-popover--left .wf-popover-arrow {
+  right: -0.5rem;
+  top: 1.5rem;
+  transform: rotate(-90deg);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  background: var(--bg-popover, #fff);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+}
+
+.wf-popover--right .wf-popover-arrow {
+  left: -0.5rem;
+  top: 1.5rem;
+  transform: rotate(90deg);
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+  background: var(--bg-popover, #fff);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.wf-popover--modal {
+  /* Example modal style */
+  background: rgba(0,0,0,0.1);
+}

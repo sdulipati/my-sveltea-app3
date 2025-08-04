@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"baseUrl": ".",
+		"types": ["svelte"],
+		"paths": {
+			"$lib/*": ["src/lib/*"]
+		},
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"outDir": "dist/types",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"strict": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"verbatimModuleSyntax": true
+	},
+	"include": [
+		"src/**/*",
+		"src/global.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"build",
+		"public",
+		"src/lib/components/**/*.test.js",
+		"src/lib/components/**/*.test.ts"
+	]
+}

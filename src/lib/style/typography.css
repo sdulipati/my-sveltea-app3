@@ -1,0 +1,14 @@
+:host {
+    --font-family: Open-Sans, sans-serif;
+    --text-body-semibold: 1rem;
+    --font-display: 'Open-Sans';
+    --text-body-semibold-font-weight: 600;
+    --text-body-semibold-line-height: 1.5;
+    --text-body-regular: 1rem;
+    --text-body-regular-font-weight: 400;
+    --text-body-regular-line-height: 1.5;
+    --text-body-small: 0.875rem;
+    --text-body-small-font-weight: 400;
+    --text-body-small-line-height: 1.5;
+    --text-body-extra-small: 0.75rem;
+}

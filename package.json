@@ -1,0 +1,98 @@
+{
+  "name": "my-svelte-app3",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && npm run prepack",
+    "preview": "vite preview",
+    "test": "npm run test:integration && npm run test:unit",
+    "lint": "npx prettier --check \"src/**/*.{svelte,ts,js,scss,json}\" . && eslint .",
+    "format": "npx prettier --write \"src/**/*.{svelte,ts,js,scss,json}\"",
+    "test:integration": "playwright test",
+    "test:unit": "vitest run",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic --project-token=your-project-token",
+    "precommit": "npm run test && npm run lint"
+  },
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  },
+  "exports": {
+    ".": "./dist/my-svelte-app3.js",
+    "./dist/*": "./dist/*",
+    "./types/*": "./dist/types/*",
+    "./types": "./dist/index.d.ts"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.0",
+    "@internationalized/date": "^3.8.2",
+    "@lucide/svelte": "^0.513.0",
+    "@playwright/test": "^1.28.1",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.3",
+    
+    "@sveltejs/vite-plugin-svelte": "4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/svelte": "^5.2.8",
+    "@types/eslint": "^8.56.7",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^24.0.1",
+    "@types/postcss-import": "^14.0.3",
+    "autoprefixer": "^10.4.21",
+    "bits-ui": "^2.7.0",
+    "chromatic": "^11.5.6",
+    "clsx": "^2.1.1",
+    "cssnano": "^7.0.7",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-storybook": "^9.0.1",
+    "eslint-plugin-svelte": "^2.46.1",
+    "globals": "^15.0.0",
+    "jsdom": "^26.1.0",
+    "postcss": "^8.5.5",
+    "postcss-import": "^16.1.0",
+    "prettier": "^3.1.1",
+    "prettier-plugin-svelte": "^3.2.6",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "publint": "^0.1.9",
+    "rollup": "^4.44.0",
+    "rollup-plugin-css-only": "^4.5.2",
+    "sass": "^1.77.6",
+    
+    "svelte": "^5.33.3",
+    "svelte-check": "^4.0.0",
+    "tailwind-merge": "^3.3.0",
+    "tailwind-variants": "^1.0.0",
+    "tailwindcss": "^4.0.0",
+    "tslib": "^2.4.1",
+    "tw-animate-css": "^1.3.4",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.21.0",
+    "vite": "^5.4.4",
+    "vitest": "^1.2.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "fontawesome-svelte": "^3.0.0",
+    "lucide-svelte": "^0.526.0",
+    "svelte-preprocess": "^6.0.1"
+  },
+  "keywords": [
+    "svelte"
+  ]
+}

@@ -1,0 +1,139 @@
+:host {
+  display: block;
+  font-family: inherit;
+}
+
+.wf-command {
+  background: var(--command-bg, #fff);
+  border: 1px solid var(--command-border, #e5e7eb);
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-command-input-wrapper[data-slot="command-input-wrapper"] {
+  height: 3rem; /* h-12 */
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 0.5rem;
+}
+
+.wf-command-search-icon {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.wf-command-input[data-slot="command-input"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  height: 3rem; /* h-12 */
+  color: var(--command-fg, #222);
+  padding: 0.75rem 0;
+}
+
+.wf-command-input[data-slot="command-input"]:disabled {
+  background: #f3f4f6;
+  color: #a1a1aa;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wf-command-input[data-slot="command-input"]::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+.wf-command-list[data-slot="command-list"] {
+  margin-top: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  flex: 1 1 auto;
+}
+
+[data-slot="command-empty"] {
+  padding-top: 1.5rem; /* py-6 */
+  padding-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem; /* text-sm */
+  color: var(--command-empty-fg, #888);
+}
+
+[data-slot="command-group"] {
+  color: var(--command-group-fg, inherit);
+  overflow: hidden;
+  padding: 0.25rem; /* p-1 */
+}
+
+[data-slot="command-group"]:not([hidden]) ~ [data-slot="command-group"] {
+  padding-top: 0;
+}
+
+.wf-command-group-heading {
+  color: #6b7280; /* text-muted-foreground */
+  padding: 0.375rem 0.5rem; /* px-2 py-1.5 */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500; /* font-medium */
+}
+
+.wf-command-item {
+  /* relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none */
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;                /* gap-2 */
+  border-radius: 0.25rem;     /* rounded-sm */
+  padding: 0.375rem 0.5rem;   /* py-1.5 px-2 */
+  font-size: 0.875rem;        /* text-sm */
+  cursor: default;
+  user-select: none;
+  outline: none;
+  transition: background 0.15s;
+}
+
+.wf-command-item:focus {
+  outline: none;
+}
+
+.wf-command-item[aria-selected="true"] {
+  background: #e0e7ff; /* bg-accent (customize as needed) */
+  color: #3730a3;      /* text-accent-foreground (customize as needed) */
+}
+
+.wf-command-item:hover:not([data-disabled]):not([disabled]),
+.wf-command-item:focus-visible:not([data-disabled]):not([disabled]) {
+  background: #f1f5f9;
+}
+
+.wf-command-item[data-disabled],
+.wf-command-item[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+  color: #a1a1aa;
+  background: none;
+  cursor: not-allowed;
+}
+
+/* SVG icon styling */
+.wf-command-item svg:not([class*='text-']) {
+  color: #6b7280; /* text-muted-foreground */
+}
+.wf-command-item svg:not([class*='size-']) {
+  width: 1rem;
+  height: 1rem;
+}
+.wf-command-item svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
