@@ -1,0 +1,51 @@
+ @import '../../style/colors.css';
+  @import '../command/Command.css';
+   @import '../popover/Popover.css';
+.wf-combobox {
+  width: 100%;
+  position: relative;
+}
+
+.wf-combobox-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+
+.wf-combobox-trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wf-combobox-chevron {
+  margin-left: 0.5rem;
+  opacity: 0.7;
+}
+
+.wf-command-item[aria-selected="true"] {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.wf-command-item[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+  color: #a1a1aa;
+  background: none;
+  cursor: not-allowed;
+}
+
+.wf-command-empty {
+  padding: 1rem;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+}
