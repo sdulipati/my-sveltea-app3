@@ -52,6 +52,7 @@ export default defineConfig({
     lib: {
       entry: {
         button: 'src/lib/components/button/Button.svelte',
+        combobox: 'src/lib/components/comboBox/ComboBox.svelte',
         input: 'src/lib/components/input/Input.svelte',
         colors: 'src/lib/style/colors.css',
         typography: 'src/lib/style/typography.css',

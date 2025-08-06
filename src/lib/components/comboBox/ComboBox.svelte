@@ -6,6 +6,9 @@
 />
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { FontAwesomeIcon } from "fontawesome-svelte";
+  import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+  import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
   type ComboBoxOption = { label: string; value: string; disabled?: boolean };
 
@@ -15,12 +18,24 @@
     placeholder = "Select option...",
     value: propValue = null,
     disabled = false,
+    trigger = 'click',
+    placement = 'bottom',
+    arrow = true,
+    inputPlaceholder = "Search...",
+    icon = faChevronDown,
+    inputIcon = faSearch,
     onSelect = () => {},
   } = $props<{
     options?: ComboBoxOption[];
     placeholder?: string;
     value?: string | null;
     disabled?: boolean;
+    trigger?: string;
+    placement?: string;
+    arrow?: boolean;  
+    inputPlaceholder?: string;
+    icon?: any;
+    inputIcon?: any;
     onSelect?: (option: ComboBoxOption) => void;
   }>();
 
@@ -64,7 +79,8 @@
 </script>
 
 <div class="wf-combobox">
-  <wf-popover open={open} on:open-change={e => open = e.detail} placement="bottom-start" trigger="manual" arrow>
+  <wf-popover open={open} onopen-change={(e: CustomEvent) => { open = e.detail}}
+     placement={placement} trigger="click" arrow={arrow} >
     <button
       slot="trigger"
       class="wf-combobox-trigger"
@@ -72,20 +88,21 @@
       aria-haspopup="listbox"
       aria-expanded={open}
       disabled={disabled}
-      on:click={() => (open = !open)}
+      onclick={() => (open = !open)}
     >
       {inputValue || placeholder}
-      <svg class="wf-combobox-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24">
+      <FontAwesomeIcon icon={icon} class="wf-combobox-input-icon" />
+      <!-- <svg class="wf-combobox-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24">
         <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/>
-      </svg>
+      </svg> -->
     </button>
-    <wf-command  placeholder="Search..." style="min-width: 200px;">
+    <wf-command  placeholder={inputPlaceholder} icon={inputIcon}>
       {#each filtered as option}
         <div
           class="wf-command-item"
           aria-selected={option.value === selectedValue}
           data-disabled={option.disabled ? true : undefined}
-          on:click={() => handleSelect(option)}
+          onclick={() => handleSelect(option)}
           tabindex={option.disabled ? -1 : 0}
         >
           {option.label}

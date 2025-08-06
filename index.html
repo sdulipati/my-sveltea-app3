@@ -11,87 +11,16 @@
     <h1>Welcome to My Sveltea App</h1>
     <p>This is a simple Svelte application.</p>
 
-    <wf-button
-       variant="primary"
-       size="md" id="my-button">    Pei</wf-button>
-       <wf-button id="test-button" variant="primary" size="md">Test Button</wf-button>
+   
+       
 
-       <wf-popover placement="bottom" trigger="hover" arrow modal>
-  <span slot="trigger">Hover me</span>
-  <div>Popover content</div>
-</wf-popover>
-
-<!-- Add these inside your <body> tag in index.html -->
-
-<!-- Popover with click trigger and bottom placement (default) -->
-<wf-popover placement="top" trigger="click" arrow="true">
-  <span slot="trigger">Click me</span>
-  <div>Popover content</div>
-  <span slot="arrow">custom arrow</span>
-</wf-popover>
-
-<!-- Popover with right placement and focus trigger -->
-<wf-popover placement="right" trigger="focus" arrow>
-  <button slot="trigger">Focus me</button>
-  <div>This popover opens on focus (right)</div>
-</wf-popover>
-
-<!-- Popover with left placement, no arrow, and modal mode -->
-<wf-popover placement="left" trigger="click" modal style="margin-left: 10px;">
-  <span slot="trigger">Left modal</span>
-  <div>This popover opens on click (left, modal, no arrow)</div>
-</wf-popover>
-
-<!-- Disabled popover -->
-<wf-popover placement="bottom" trigger="click" disabled>
-  <span slot="trigger">Disabled popover</span>
-  <div>You should not see this content</div>
-</wf-popover>
-
-<!-- Popover with custom offset -->
-<wf-popover placement="top" trigger="click" arrow offset="24">
-  <span slot="trigger">Custom offset</span>
-  <div>This popover has a 24px offset</div>
-</wf-popover>
-
-<wf-command placeholder="Search commands...">
-  <div data-slot="command-group">
-    <div class="wf-command-group-heading">Fruits</div>
-    <div>Apple</div>
-    <div>Banana</div>
-    <div>Cherry</div>
-  </div>
-  <div data-slot="command-group">
-    <div class="wf-command-group-heading">Vegetables</div>
-    <div>Carrot</div>
-    <div>Broccoli</div>
-    <div>Spinach</div>
-  </div>
-  <div slot="empty" data-slot="command-empty">No results found.</div>
-</wf-command>
-
-<wf-command placeholder="Search commands...">
-  <div>Apple</div>
-  <div>Banana</div>
-  <div>Cherry</div>
-  <div slot="empty" data-slot="command-empty">No results found.</div>
-</wf-command>
-
-<wf-command placeholder="Search commands...">
-  <div data-slot="command-group">
-    <div class="wf-command-group-heading">Suggestions</div>
-    <div class="wf-command-item">
-      <span>Calendar</span>
-    </div>
-    <div class="wf-command-item">
-      <span>Search Emoji</span>
-    </div>
-    <div class="wf-command-item" data-disabled>
-      <span>Calculator (disabled)</span>
-    </div>
-  </div>
-  <div slot="empty" data-slot="command-empty">No results found.</div>
-</wf-command>
+<wf-combobox slot="trigger" trigger="click"
+options='[{"label":"Apple","value":"apple"},{"label":"Banana","value":"banana"}]' 
+placeholder="Pick a fruit..." 
+icon="fa-solid fa-chevron-down"
+placement="bottom"
+onselect="handleSelect(event)"
+></wf-combobox>
        
        </body>
 </html>
