@@ -7,10 +7,15 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
-  import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-  import { faSearch } from "@fortawesome/free-solid-svg-icons";
+  import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+  import type { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
   type ComboBoxOption = { label: string; value: string; disabled?: boolean };
+  const iconMap: Record<string, IconDefinition> = {
+    'fa-chevron-down': faChevronDown,
+    'fa-search': faSearch
+  };
+  
 
   // Props
   const {
@@ -18,12 +23,12 @@
     placeholder = "Select option...",
     value: propValue = null,
     disabled = false,
-    trigger = 'click',
-    placement = 'bottom',
+    trigger = "click",
+    placement = "bottom",
     arrow = true,
     inputPlaceholder = "Search...",
-    icon = faChevronDown,
     inputIcon = faSearch,
+    icon: iconName = 'fa-chevron-down', 
     onSelect = () => {},
   } = $props<{
     options?: ComboBoxOption[];
@@ -35,11 +40,12 @@
     arrow?: boolean;  
     inputPlaceholder?: string;
     icon?: any;
-    inputIcon?: any;
+    inputIcon?: string;
     onSelect?: (option: ComboBoxOption) => void;
   }>();
 
   console.log("options prop:", options);
+  let icon = iconMap[iconName] ?? faChevronDown;
   let parsedOptions = $derived(
     typeof options === "string"
       ? (() => {
@@ -76,11 +82,17 @@
     )
   );
   console.log("filtered options:", filtered);
+
+   $effect(() => {
+    console.log('Popover isOpen changed in COmboBox:', open, 'type:', typeof open);
+  });
 </script>
 
 <div class="wf-combobox">
-  <wf-popover open={open} onopen-change={(e: CustomEvent) => { open = e.detail}}
-     placement={placement} trigger="click" arrow={arrow} >
+  <wf-popover
+    open={open}
+    
+     placement={placement} trigger={trigger} arrow={arrow} >
     <button
       slot="trigger"
       class="wf-combobox-trigger"
@@ -88,7 +100,6 @@
       aria-haspopup="listbox"
       aria-expanded={open}
       disabled={disabled}
-      onclick={() => (open = !open)}
     >
       {inputValue || placeholder}
       <FontAwesomeIcon icon={icon} class="wf-combobox-input-icon" />

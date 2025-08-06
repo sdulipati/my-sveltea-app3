@@ -5,7 +5,7 @@ import autoprefixer from "autoprefixer";
 import postCssImport from "postcss-import";
 import { sveltePreprocess } from "svelte-preprocess";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     svelte({
       compilerOptions: {
@@ -64,7 +64,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
+        chunkFileNames: '[name]-[hash].js',
         assetFileNames: '[name][extname]',
       },
       external: ['svelte', 'svelte/internal'],
@@ -76,4 +76,4 @@ export default defineConfig({
   preview: {
     port: 4173
   }
-});
+}));

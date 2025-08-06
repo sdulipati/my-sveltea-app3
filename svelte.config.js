@@ -1,10 +1,9 @@
  import { sveltePreprocess } from "svelte-preprocess";
-import { compile } from "svelte/compiler";
 
  const config = {
    preprocess: sveltePreprocess(),
    compileOptions: {
-	 customElements: true,
+	 customElement: true,
 	 runes:true
 	    },
 	};

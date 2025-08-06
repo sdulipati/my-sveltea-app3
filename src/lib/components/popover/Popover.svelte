@@ -45,27 +45,35 @@
 
   const isDisabled = $derived(disabled === true || disabled === 'true' || disabled === '');
   const id = $derived(providedId ?? `popover_${placement}`);
-  let isOpen = $derived(open);
+  let isOpen = $derived(
+    open === true || open === 'true'
+  );
+  console.log ('Popover isOpen:', isOpen);
 
   function handleClick() {
     if (isDisabled) return;
     if (trigger === 'click') isOpen = !isOpen;
+    console.log('Popover clicked1, isOpen:', isOpen);
   }
-  function handleMouseEnter() {
-    if (isDisabled) return;
-    if (trigger === 'hover') isOpen = true;
-  }
-  function handleMouseLeave() {
-    if (isDisabled) return;
-    if (trigger === 'hover') isOpen = false;
-  }
-  function handleFocus() {
-    if (isDisabled) return;
-    if (trigger === 'focus') isOpen = true;
-  }
+  // function handleMouseEnter() {
+  //   if (isDisabled) return;
+  //   if (trigger === 'hover') isOpen = true;
+  //   console.log('Popover clicked2, isOpen:', isOpen);
+  // }
+  // function handleMouseLeave() {
+  //   if (isDisabled) return;
+  //   if (trigger === 'hover') isOpen = false;
+  //   console.log('Popover clicked3, isOpen:', isOpen);
+  // }
+  // function handleFocus() {
+  //   if (isDisabled) return;
+  //   if (trigger === 'focus') isOpen = true;
+  //   console.log('Popover clicked4, isOpen:', isOpen);
+  // }
   function handleBlur() {
     if (isDisabled) return;
     if (trigger === 'focus') isOpen = false;
+    console.log('Popover clicked5, isOpen:', isOpen);
   }
 
   let popoverRoot: HTMLElement;
@@ -78,11 +86,11 @@
     if (!triggerEl) return;
 
     // Remove previous listeners if any
-    triggerEl.removeEventListener('focus', handleFocus);
+    // triggerEl.removeEventListener('focus', handleFocus);
     triggerEl.removeEventListener('blur', handleBlur);
 
     // Add listeners
-    triggerEl.addEventListener('focus', handleFocus);
+    // triggerEl.addEventListener('focus', handleFocus);
     triggerEl.addEventListener('blur', handleBlur);
   }
 
@@ -97,11 +105,11 @@
       if (!triggerEl) return;
 
       // Remove previous listeners if any
-      triggerEl.removeEventListener('focus', handleFocus);
+      // triggerEl.removeEventListener('focus', handleFocus);
       triggerEl.removeEventListener('blur', handleBlur);
 
       // Add listeners
-      triggerEl.addEventListener('focus', handleFocus);
+      // triggerEl.addEventListener('focus', handleFocus);
       triggerEl.addEventListener('blur', handleBlur);
     }
 
@@ -117,22 +125,9 @@
     };
   }
 
-  // Close on outside click
+
   $effect(() => {
-    if (!isOpen || isDisabled) return;
-
-    function handleDocumentClick(event: MouseEvent) {
-      if (!popoverRoot) return;
-      if (!popoverRoot.contains(event.target as Node)) {
-        isOpen = false;
-      }
-    }
-
-    document.addEventListener('mousedown', handleDocumentClick, true);
-
-    return () => {
-      document.removeEventListener('mousedown', handleDocumentClick, true);
-    };
+    console.log('Popover isOpen changed:', isOpen, 'type:', typeof open);
   });
 </script>
 
@@ -149,14 +144,13 @@
   <div
     class="wf-popover-trigger"
     tabindex={isDisabled ? -1 : 0}
-    on:click={handleClick}
-    on:mouseenter={handleMouseEnter}
-    on:mouseleave={handleMouseLeave}
+    onclick={handleClick}
     aria-disabled={isDisabled}
     use:slotAction
   >
     <slot name="trigger" />
   </div>
+  <!-- <div>DEBUG: isOpen = {isOpen}</div> -->
   {#if isOpen && !isDisabled}
     <div
       class="popover-content wf-popover--{placement}"
@@ -177,5 +171,7 @@
     </div>
   {/if}
 </div>
+
+<!-- <div>DEBUG: isOpen = {isOpen}</div> -->
 
 <style src="./Popover.css"></style>
