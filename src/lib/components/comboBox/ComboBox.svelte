@@ -6,16 +6,12 @@
 />
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { FontAwesomeIcon } from "fontawesome-svelte";
+    import { FontAwesomeIcon } from "fontawesome-svelte";
   import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
   import type { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
+
   type ComboBoxOption = { label: string; value: string; disabled?: boolean };
-  const iconMap: Record<string, IconDefinition> = {
-    'fa-chevron-down': faChevronDown,
-    'fa-search': faSearch
-  };
-  
 
   // Props
   const {
@@ -25,10 +21,12 @@
     disabled = false,
     trigger = "click",
     placement = "bottom",
-    arrow = true,
+    arrow = false,
     inputPlaceholder = "Search...",
+    icon = faChevronDown as IconDefinition,
     inputIcon = faSearch,
     icon: iconName = 'fa-chevron-down', 
+
     onSelect = () => {},
   } = $props<{
     options?: ComboBoxOption[];
@@ -37,15 +35,16 @@
     disabled?: boolean;
     trigger?: string;
     placement?: string;
-    arrow?: boolean;  
+    arrow?: boolean;
     inputPlaceholder?: string;
-    icon?: any;
+       icon?: any;
     inputIcon?: string;
+
     onSelect?: (option: ComboBoxOption) => void;
   }>();
 
+
   console.log("options prop:", options);
-  let icon = iconMap[iconName] ?? faChevronDown;
   let parsedOptions = $derived(
     typeof options === "string"
       ? (() => {
@@ -72,7 +71,9 @@
     selectedValue = option.value;
     inputValue = option.label;
     open = false;
-    onSelect(option);
+    if (typeof onSelect === "function") {
+      onSelect(option);
+    }
     dispatch("select", option); // for parent binding
   }
 
@@ -91,7 +92,6 @@
 <div class="wf-combobox">
   <wf-popover
     open={open}
-    
      placement={placement} trigger={trigger} arrow={arrow} >
     <button
       slot="trigger"
@@ -102,12 +102,12 @@
       disabled={disabled}
     >
       {inputValue || placeholder}
-      <FontAwesomeIcon icon={icon} class="wf-combobox-input-icon" />
+      <i class="{icon} wf-combobox-input-icon"></i>
       <!-- <svg class="wf-combobox-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24">
         <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/>
       </svg> -->
     </button>
-    <wf-command  placeholder={inputPlaceholder} icon={inputIcon}>
+    <wf-command placeholder={inputPlaceholder} icon={inputIcon}>
       {#each filtered as option}
         <div
           class="wf-command-item"
@@ -119,9 +119,7 @@
           {option.label}
         </div>
       {/each}
-      {#if filtered.length === 0}
         <div slot="empty" class="wf-command-empty">No results found.</div>
-      {/if}
     </wf-command>
   </wf-popover>
 </div>

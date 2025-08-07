@@ -1,6 +1,7 @@
  @import '../../style/colors.css';
-  @import '../command/Command.css';
-   @import '../popover/Popover.css';
+  /* @import '../command/Command.css'; */
+   @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
 .wf-combobox {
   width: 100%;
   position: relative;
@@ -25,9 +26,26 @@
   cursor: not-allowed;
 }
 
-.wf-combobox-chevron {
+/* Font Awesome icon styling */
+.wf-combobox-icon {
   margin-left: 0.5rem;
   opacity: 0.7;
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s ease;
+  color: #6b7280;
+}
+.wf-combobox-input-icon {
+  margin-left: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  color: red; /* Tailwind gray-500 */
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.wf-combobox-icon.rotated {
+  transform: rotate(180deg);
 }
 
 .wf-command-item[aria-selected="true"] {
@@ -48,4 +66,15 @@
   text-align: center;
   color: #888;
   font-size: 0.9rem;
+}
+
+.wf-command {
+  background: var(--command-bg, red);
+  border: 1px solid var(--command-border, #e5e7eb);
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
 }

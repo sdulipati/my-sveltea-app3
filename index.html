@@ -5,22 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Sveltea App</title>
     <script type="module" src="/src/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   </head>
+    <script>
+  function handleSelect(event) {
+    console.log('Selected option in HTML:', event.detail);
+  }
+
+   window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('wf-combobox').addEventListener('select', handleSelect);
+  });
+</script>
+<script>
+  function handleCommandSelect(event) {
+    console.log('wf-command selected in HTML:', event.detail);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('wf-command').addEventListener('select', handleCommandSelect);
+  });
+</script>
   <body>
     <div id="app"></div>
     <h1>Welcome to My Sveltea App</h1>
     <p>This is a simple Svelte application.</p>
 
-   
-       
+    <wf-command placeholder="Search commands...">
+  <div data-slot="command-group">
+    <div class="wf-command-group-heading">Suggestions</div>
+    <div class="wf-command-item" data-value="calendar">
+      <span>Calendar</span>
+    </div>
+    <div class="wf-command-item">
+      <span>Search Emoji</span>
+    </div>
+    <div class="wf-command-item" data-disabled>
+      <span>Calculator (disabled)</span>
+    </div>
+  </div>
+  <div slot="empty" data-slot="command-empty">No results found.</div>
+</wf-command>
 
-<wf-combobox slot="trigger" trigger="click"
-options='[{"label":"Apple","value":"apple"},{"label":"Banana","value":"banana"}]' 
-placeholder="Pick a fruit..." 
-icon="fa-solid fa-chevron-down"
-placement="bottom"
-onselect="handleSelect(event)"
-></wf-combobox>
-       
-       </body>
+    <wf-combobox slot="trigger" trigger="click"
+      options='[{"label":"Apple","value":"apple"},{"label":"Banana","value":"banana"}]'
+      placeholder="Pick a fruit..."
+      icon="fa-solid fa-chevron-down"
+      placement="right" arrow = "false"
+    ></wf-combobox>
+  </body>
+
+ 
 </html>

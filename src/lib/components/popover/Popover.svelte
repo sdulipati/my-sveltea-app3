@@ -158,7 +158,7 @@
       data-side={placement}
       role={modal ? 'dialog' : 'tooltip'}
     >
-      {#if arrow}
+      {#if arrow == true || arrow === 'true'}
         <div
           class="wf-popover-arrow"
           data-arrow

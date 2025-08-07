@@ -20,7 +20,7 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
 
   let {
     value = '',
@@ -42,6 +42,8 @@
 
   let items: HTMLElement[] = [];
   let filteredItems: HTMLElement[] = [];
+
+  const dispatch = createEventDispatcher();
 
   function handleInput(event: Event) {
     value = (event.target as HTMLInputElement).value;
@@ -103,11 +105,24 @@
     console.log("value", value);
   }
 
+  function handleItemClick(event: MouseEvent) {
+    const item = event.currentTarget as HTMLElement;
+    // Get label/value from the item's content or dataset
+    const label = item.textContent?.trim() ?? "";
+    const value = item.dataset.value ?? label;
+    dispatch("select", { label, value });
+  }
+
   // Get the custom element instance on mount
   onMount(() => {
     // The custom element instance is the parentNode of the shadowRoot
     customElement = commandRoot.getRootNode().host as HTMLElement;
     filterItems();
+
+    // Add click listeners to all .wf-command-item elements
+    customElement.querySelectorAll('.wf-command-item').forEach((el) => {
+      el.addEventListener('click', handleItemClick);
+    });
   });
 
   // Run filter after every update (input or slot change)
